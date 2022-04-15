@@ -13,7 +13,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/StrongHigh","https://facebook.com/profile.php?id=100011132584349","mailto"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/13537\n풀이수열을 다음과 같은 업데이트 쿼리로 해석한다.\na b : 위치가 a인 위치를 b로 교체\n그리고 쿼리 (i j k)를 k에 대해 내림차순으로 정렬한다.\n업데이트 쿼리들도 마찬가지로, b에 대해 내림차순으로 정렬한다.\n그리고, k&gt;b를 만족할때, 세그먼트 트리에서 위치가 a인 곳에 1을 업데이트 한다.\n그러면, 트리에서 i부터 j까지의 합이 쿼리 (i j k)에 대한 답변이 된다.\n출력할때도, 쿼리의 입력순으로 정렬해주자. \n소스12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;#include&lt;functional&gt;#define ll long longusing namespace std;struct _ &#123; ll idx, i, j, k; &#125;;bool operator&lt;(_ a, _ b) &#123; return a.k &gt; b.k; &#125;vector&lt;_&gt; query;vector&lt;pair&lt;ll, ll&gt; &gt;arr, ans;ll N, MAX, tree[400000], M;void update(ll p, ll v) &#123;\tp += MAX;\ttree[p] = v;\tfor (; p /= 2; tree[p] = tree[2 * p] + tree[2 * p + 1]);&#125;ll sum(ll s, ll e) &#123;\tll res = 0;\ts += MAX, e += MAX;\twhile (s &lt; e) &#123;\t\tif (s % 2)\t\t\tres += tree[s++];\t\tif (e % 2 == 0)\t\t\tres += tree[e--];\t\te /= 2;\t\ts /= 2;\t&#125;\tif(s==e)\t\tres += tree[e];\treturn res;&#125;int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; N;\tfor (MAX = 1; MAX &lt; N; MAX *= 2);\tfor (int i = 1; i &lt;= N; i++) &#123;\t\tll tmp;\t\tcin &gt;&gt; tmp;\t\tarr.push_back(&#123; tmp,i &#125;);\t&#125;\tcin &gt;&gt; M;\tfor (int i = 0; i &lt; M; i++) &#123;\t\tll a, b, c;\t\tcin &gt;&gt; a &gt;&gt; b &gt;&gt; c;\t\tquery.push_back(&#123; i,a,b,c &#125;);\t&#125;\tsort(arr.begin(), arr.end(), greater&lt;pair&lt;ll, ll&gt; &gt;() );\tsort(query.begin(), query.end());\tll now = 0;\tfor (auto idx : query) &#123;\t\twhile (now &lt; arr.size() &amp;&amp; idx.k &lt; arr[now].first) &#123;\t\t\tupdate(arr[now].second, 1);\t\t\tnow++;\t\t&#125;\t\tans.push_back(&#123; idx.idx, sum(idx.i,idx.j) &#125;);\t&#125;\tsort(ans.begin(), ans.end());\tfor (auto idx : ans)\t\tcout &lt;&lt; idx.second &lt;&lt; &quot;\\n&quot;;&#125;\n\n","dateCreated":"2019-08-01T23:04:48+09:00","dateModified":"2019-08-01T23:14:35+09:00","datePublished":"2019-08-01T23:04:48+09:00","description":"","headline":"[BOJ] 13537 | 수열과 쿼리 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/08/01/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/StrongHigh","https://facebook.com/profile.php?id=100011132584349","mailto"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/08/01/extitle/","keywords":"BOJ, segment_tree, sort"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/13537\n풀이수열을 다음과 같은 업데이트 쿼리로 해석한다.\na b : 위치가 a인 위치를 b로 교체\n그리고 쿼리 (i j k)를 k에 대해 내림차순으로 정렬한다.\n업데이트 쿼리들도 마찬가지로, b에 대해 내림차순으로 정렬한다.\n그리고, k&gt;b를 만족할때, 세그먼트 트리에서 위치가 a인 곳에 1을 업데이트 한다.\n그러면, 트리에서 i부터 j까지의 합이 쿼리 (i j k)에 대한 답변이 된다.\n출력할때도, 쿼리의 입력순으로 정렬해주자. \n소스12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;#include&lt;functional&gt;#define ll long longusing namespace std;struct _ &#123; ll idx, i, j, k; &#125;;bool operator&lt;(_ a, _ b) &#123; return a.k &gt; b.k; &#125;vector&lt;_&gt; query;vector&lt;pair&lt;ll, ll&gt; &gt;arr, ans;ll N, MAX, tree[400000], M;void update(ll p, ll v) &#123;\tp += MAX;\ttree[p] = v;\tfor (; p /= 2; tree[p] = tree[2 * p] + tree[2 * p + 1]);&#125;ll sum(ll s, ll e) &#123;\tll res = 0;\ts += MAX, e += MAX;\twhile (s &lt; e) &#123;\t\tif (s % 2)\t\t\tres += tree[s++];\t\tif (e % 2 == 0)\t\t\tres += tree[e--];\t\te /= 2;\t\ts /= 2;\t&#125;\tif(s==e)\t\tres += tree[e];\treturn res;&#125;int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; N;\tfor (MAX = 1; MAX &lt; N; MAX *= 2);\tfor (int i = 1; i &lt;= N; i++) &#123;\t\tll tmp;\t\tcin &gt;&gt; tmp;\t\tarr.push_back(&#123; tmp,i &#125;);\t&#125;\tcin &gt;&gt; M;\tfor (int i = 0; i &lt; M; i++) &#123;\t\tll a, b, c;\t\tcin &gt;&gt; a &gt;&gt; b &gt;&gt; c;\t\tquery.push_back(&#123; i,a,b,c &#125;);\t&#125;\tsort(arr.begin(), arr.end(), greater&lt;pair&lt;ll, ll&gt; &gt;() );\tsort(query.begin(), query.end());\tll now = 0;\tfor (auto idx : query) &#123;\t\twhile (now &lt; arr.size() &amp;&amp; idx.k &lt; arr[now].first) &#123;\t\t\tupdate(arr[now].second, 1);\t\t\tnow++;\t\t&#125;\t\tans.push_back(&#123; idx.idx, sum(idx.i,idx.j) &#125;);\t&#125;\tsort(ans.begin(), ans.end());\tfor (auto idx : ans)\t\tcout &lt;&lt; idx.second &lt;&lt; &quot;\\n&quot;;&#125;\n\n","dateCreated":"2019-08-01T23:04:48+09:00","dateModified":"2019-08-01T23:14:35+09:00","datePublished":"2019-08-01T23:04:48+09:00","description":"","headline":"[BOJ] 13537 | 수열과 쿼리 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/08/01/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/08/01/extitle/","keywords":"BOJ, segment_tree, sort"}</script>
     <meta name="description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;13537 풀이수열을 다음과 같은 업데이트 쿼리로 해석한다. a b : 위치가 a인 위치를 b로 교체 그리고 쿼리 (i j k)를 k에 대해 내림차순으로 정렬한다. 업데이트 쿼리들도 마찬가지로, b에 대해 내림차순으로 정렬한다. 그리고, k&gt;b를 만족할때, 세그먼트 트리에서 위치가 a인 곳에">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[BOJ] 13537 | 수열과 쿼리 1">
@@ -132,7 +132,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/%20"
+                             href="/"
                             
                             title="Home"
                         >
@@ -170,7 +170,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link "
+                        <a  class="sidebar-button-link open-algolia-search"
                              href="/all-archives"
                             
                             title="Archives"
@@ -178,19 +178,6 @@
                     
                         <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a  class="sidebar-button-link open-algolia-search"
-                             href="#search"
-                            
-                            title="Search"
-                        >
-                    
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
                     </a>
             </li>
             
@@ -213,7 +200,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link " href="https://github.com/StrongHigh" target="_blank" rel="noopener" title="GitHub">
+                        <a  class="sidebar-button-link " href="https://github.com/0rkha" target="_blank" rel="noopener" title="GitHub">
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
@@ -231,10 +218,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link "
-                             href="/mailto"
-                            title="Mail"
-                        >
+                        <a  class="sidebar-button-link " href="mailto:xx0rkha@gmail.com" target="_blank" rel="noopener" title="Mail">
                     
                         <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Mail</span>

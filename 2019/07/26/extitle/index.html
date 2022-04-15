@@ -13,7 +13,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/StrongHigh","https://facebook.com/profile.php?id=100011132584349","mailto"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/2293\n풀이DP를 사용하여 풀 수 있는 간단한 문제.\nDP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수\nDP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1)\n따라서 전체 시간복잡도는 O(nk)가 된다.\nDP의 점화식을 2차원으로 세우면 메모리 초과가 나므로, 위와같은 1차원으로 짜주어야 한다.\nfor문을 돌 때, 가격이 i일때 경우의수를 0~n-1까지 도는 것이 아니라,\n 물건 번호가 j일때 가격을 1~k까지 DP를 업데이트 하는것에 주의하자.\n소스123456789101112131415161718#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int n, k, dp[10010], coin[101];int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; n &gt;&gt; k;\tfor (int i = 0; i &lt;n; i++)\t\tcin &gt;&gt; coin[i];\tdp[0] = 1;\tsort(coin, coin + n);\tfor (int j = 0; j &lt; n; j++) \t\tfor (int i = 1; i &lt;= k; i++) \t\t\tif (i &gt;= coin[j])\t\t\t\tdp[i] += dp[i - coin[j]];\tcout &lt;&lt; dp[k];&#125;\n\n","dateCreated":"2019-07-26T16:38:33+09:00","dateModified":"2019-07-26T22:34:26+09:00","datePublished":"2019-07-26T16:38:33+09:00","description":"","headline":"[BOJ] 2293 | 동전 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/07/26/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/StrongHigh","https://facebook.com/profile.php?id=100011132584349","mailto"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/07/26/extitle/","keywords":"BOJ, DP"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/2293\n풀이DP를 사용하여 풀 수 있는 간단한 문제.\nDP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수\nDP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1)\n따라서 전체 시간복잡도는 O(nk)가 된다.\nDP의 점화식을 2차원으로 세우면 메모리 초과가 나므로, 위와같은 1차원으로 짜주어야 한다.\nfor문을 돌 때, 가격이 i일때 경우의수를 0~n-1까지 도는 것이 아니라,\n 물건 번호가 j일때 가격을 1~k까지 DP를 업데이트 하는것에 주의하자.\n소스123456789101112131415161718#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int n, k, dp[10010], coin[101];int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; n &gt;&gt; k;\tfor (int i = 0; i &lt;n; i++)\t\tcin &gt;&gt; coin[i];\tdp[0] = 1;\tsort(coin, coin + n);\tfor (int j = 0; j &lt; n; j++) \t\tfor (int i = 1; i &lt;= k; i++) \t\t\tif (i &gt;= coin[j])\t\t\t\tdp[i] += dp[i - coin[j]];\tcout &lt;&lt; dp[k];&#125;\n\n","dateCreated":"2019-07-26T16:38:33+09:00","dateModified":"2019-07-26T22:34:26+09:00","datePublished":"2019-07-26T16:38:33+09:00","description":"","headline":"[BOJ] 2293 | 동전 1","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/07/26/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/07/26/extitle/","keywords":"BOJ, DP"}</script>
     <meta name="description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;2293 풀이DP를 사용하여 풀 수 있는 간단한 문제. DP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수 DP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1) 따라서 전체 시간복잡도는 O(nk)가 된다. DP의 점화식을 2차원으로 세우면 메모리">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[BOJ] 2293 | 동전 1">
@@ -131,7 +131,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="/%20"
+                             href="/"
                             
                             title="Home"
                         >
@@ -169,7 +169,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link "
+                        <a  class="sidebar-button-link open-algolia-search"
                              href="/all-archives"
                             
                             title="Archives"
@@ -177,19 +177,6 @@
                     
                         <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a  class="sidebar-button-link open-algolia-search"
-                             href="#search"
-                            
-                            title="Search"
-                        >
-                    
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
                     </a>
             </li>
             
@@ -212,7 +199,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link " href="https://github.com/StrongHigh" target="_blank" rel="noopener" title="GitHub">
+                        <a  class="sidebar-button-link " href="https://github.com/0rkha" target="_blank" rel="noopener" title="GitHub">
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
@@ -230,10 +217,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a  class="sidebar-button-link "
-                             href="/mailto"
-                            title="Mail"
-                        >
+                        <a  class="sidebar-button-link " href="mailto:xx0rkha@gmail.com" target="_blank" rel="noopener" title="Mail">
                     
                         <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Mail</span>
