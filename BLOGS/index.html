@@ -386,8 +386,9 @@
         
         
             
-                <div id="gitalk"></div>
-
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
             
         
     </div>
@@ -702,21 +703,21 @@
 
 
     
-        
-<script src="/assets/js/gitalk.js"></script>
-
-        <script type="text/javascript">
+        <script>
+          var disqus_config = function() {
+            this.page.url = 'http://stronghigh.github.io/BLOGS/index.html';
+              
+            this.page.identifier = 'BLOGS/index.html';
+              
+          };
           (function() {
-            new Gitalk({
-              clientID: '55b3132cf1d76f9bbee1',
-              clientSecret: 'ff2b4c44be2a4d2a74bd515e7a0011f5d0b17db7',
-              repo: 'StrongHigh.github.io',
-              owner: 'StrongHigh',
-              admin: ['StrongHigh'],
-              id: 'BLOGS/index.html',
-              ...{"language":"en","perPage":10,"distractionFreeMode":false,"enableHotKey":true,"pagerDirection":"first"}
-            }).render('gitalk')
-          })()
+            var d = document, s = d.createElement('script');
+            var disqus_shortname = '0rkha-github-com';
+            s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
         </script>
     
 
