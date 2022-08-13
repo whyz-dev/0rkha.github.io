@@ -13,11 +13,11 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/2436\n출처\nKOI 2011 초등부 2번\nKOI 2011 중등부 1번\nKOI 2011 고등부 1번\n\n풀이유클리드 호제법 (최대공약수 구하기) :https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95 \n여기서는 두 입력으로 최대공약수와 최소공배수를 준다.\n두 수를 각 a와 b라고 할때, LCM을 다음과 같이 나타낼 수 있다.\nLCM &#x3D; a*b&#x2F;GCD\n이를 정리하면,\nGCD * LCM &#x3D; a*b\n이를 이용하여 시간복잡도 O(sqrt(GCD*LCM)) &#x3D; O(sqrt(a*b))만에 풀 수 있다.\n입력이 1억이니, int 범위 초과에 주의하자. \n소스123456789101112131415161718192021#include&lt;iostream&gt;using namespace std;long long GCD, LCM, mul, a, b, flag;long long gcd(long long a, long long b) &#123;\treturn b ? gcd(b, a%b) : a;&#125;int main() &#123;\tcin &gt;&gt; GCD &gt;&gt; LCM;\tmul = GCD * LCM;\ta = 1; b = LCM;\tfor (int i = 1; i &lt;= mul / i; i++) &#123;\t\tif (mul%i || gcd(i, mul / i) != GCD)\t\t\tcontinue;\t\tflag = 1;\t\ta = i, b = mul / i;\t&#125;\tif(flag)\t\tcout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b;&#125;\n\n","dateCreated":"2019-07-28T12:10:00+09:00","dateModified":"2019-07-28T13:58:00+09:00","datePublished":"2019-07-28T12:10:00+09:00","description":"","headline":"[BOJ] 2436 | 공약수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/07/28/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/07/28/extitle/","keywords":"BOJ, KOI, Euclidean-algorithm"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/2436\n출처\nKOI 2011 초등부 2번\nKOI 2011 중등부 1번\nKOI 2011 고등부 1번\n\n풀이유클리드 호제법 (최대공약수 구하기) :https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C%EB%B2%95 \n여기서는 두 입력으로 최대공약수와 최소공배수를 준다.\n두 수를 각 a와 b라고 할때, LCM을 다음과 같이 나타낼 수 있다.\nLCM &#x3D; a*b&#x2F;GCD\n이를 정리하면,\nGCD * LCM &#x3D; a*b\n이를 이용하여 시간복잡도 O(sqrt(GCD*LCM)) &#x3D; O(sqrt(a*b))만에 풀 수 있다.\n입력이 1억이니, int 범위 초과에 주의하자. \n소스123456789101112131415161718192021#include&lt;iostream&gt;using namespace std;long long GCD, LCM, mul, a, b, flag;long long gcd(long long a, long long b) &#123;\treturn b ? gcd(b, a%b) : a;&#125;int main() &#123;\tcin &gt;&gt; GCD &gt;&gt; LCM;\tmul = GCD * LCM;\ta = 1; b = LCM;\tfor (int i = 1; i &lt;= mul / i; i++) &#123;\t\tif (mul%i || gcd(i, mul / i) != GCD)\t\t\tcontinue;\t\tflag = 1;\t\ta = i, b = mul / i;\t&#125;\tif(flag)\t\tcout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b;&#125;\n\n","dateCreated":"2019-07-28T12:10:00+09:00","dateModified":"2019-07-28T13:58:00+09:00","datePublished":"2019-07-28T12:10:00+09:00","description":"","headline":"[BOJ] 2436 | 공약수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://0rkha.github.io/2019/07/28/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://0rkha.github.io/2019/07/28/extitle/","keywords":"BOJ, KOI, Euclidean-algorithm"}</script>
     <meta name="description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;2436 출처 KOI 2011 초등부 2번 KOI 2011 중등부 1번 KOI 2011 고등부 1번  풀이유클리드 호제법 (최대공약수 구하기) :https:&#x2F;&#x2F;ko.wikipedia.org&#x2F;wiki&#x2F;%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[BOJ] 2436 | 공약수">
-<meta property="og:url" content="http://stronghigh.github.io/2019/07/28/extitle/index.html">
+<meta property="og:url" content="http://0rkha.github.io/2019/07/28/extitle/index.html">
 <meta property="og:site_name" content="0rkha Blog">
 <meta property="og:description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;2436 출처 KOI 2011 초등부 2번 KOI 2011 중등부 1번 KOI 2011 고등부 1번  풀이유클리드 호제법 (최대공약수 구하기) :https:&#x2F;&#x2F;ko.wikipedia.org&#x2F;wiki&#x2F;%EC%9C%A0%ED%81%B4%EB%A6%AC%EB%93%9C_%ED%98%B8%EC%A0%9C">
 <meta property="og:locale" content="en_US">
@@ -33,7 +33,7 @@
         
     
     
-        <meta property="og:image" content="http://stronghigh.github.io/assets/images/thumbnail.png"/>
+        <meta property="og:image" content="http://0rkha.github.io/assets/images/thumbnail.png"/>
     
     
     
@@ -365,7 +365,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -378,7 +378,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -391,7 +391,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://plus.google.com/share?url=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -494,7 +494,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -507,7 +507,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -520,7 +520,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=http://stronghigh.github.io/2019/07/28/extitle/"
+                    target="new" href="https://plus.google.com/share?url=http://0rkha.github.io/2019/07/28/extitle/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -564,7 +564,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=http://stronghigh.github.io/2019/07/28/extitle/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://0rkha.github.io/2019/07/28/extitle/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -577,7 +577,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=http://stronghigh.github.io/2019/07/28/extitle/"
+                        href="https://twitter.com/intent/tweet?text=http://0rkha.github.io/2019/07/28/extitle/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -590,7 +590,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=http://stronghigh.github.io/2019/07/28/extitle/"
+                        href="https://plus.google.com/share?url=http://0rkha.github.io/2019/07/28/extitle/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
@@ -666,7 +666,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/21/extitle/"
+                            href="http://0rkha.github.io/2019/07/21/extitle/"
                             aria-label=": 이 블로그에 대하여"
                         >
                             <h3 class="media-heading">이 블로그에 대하여</h3>
@@ -689,7 +689,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/26/extitle/"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2293 | 동전 1"
                         >
                             <h3 class="media-heading">[BOJ] 2293 | 동전 1</h3>
@@ -712,7 +712,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/26/extitle/"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
                         >
                             <h3 class="media-heading">[BOJ] 1451 | 직사각형으로 나누기</h3>
@@ -735,7 +735,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/26/extitle/"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2294 | 동전 2"
                         >
                             <h3 class="media-heading">[BOJ] 2294 | 동전 2</h3>
@@ -758,7 +758,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/26/extitle/"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 11047 | 동전 0"
                         >
                             <h3 class="media-heading">[BOJ] 11047 | 동전 0</h3>
@@ -781,7 +781,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/07/28/extitle/"
+                            href="http://0rkha.github.io/2019/07/28/extitle/"
                             aria-label=": [BOJ] 2436 | 공약수"
                         >
                             <h3 class="media-heading">[BOJ] 2436 | 공약수</h3>
@@ -804,7 +804,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/08/01/extitle/"
+                            href="http://0rkha.github.io/2019/08/01/extitle/"
                             aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
                         >
                             <h3 class="media-heading">[BOJ] 13537 | 수열과 쿼리 1</h3>
@@ -827,17 +827,17 @@
                     <div class="media-left">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 5419 | 북서풍"
                         >
-                            <img class="media-image" src="http://stronghigh.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
                         </a>
                     </div>
                     
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 5419 | 북서풍"
                         >
                             <h3 class="media-heading">[BOJ] 5419 | 북서풍</h3>
@@ -860,17 +860,17 @@
                     <div class="media-left">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 3176 | 도로 네트워크"
                         >
-                            <img class="media-image" src="http://stronghigh.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
                         </a>
                     </div>
                     
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 3176 | 도로 네트워크"
                         >
                             <h3 class="media-heading">[BOJ] 3176 | 도로 네트워크</h3>
@@ -923,7 +923,7 @@
     
         <script>
           var disqus_config = function() {
-            this.page.url = 'http://stronghigh.github.io/2019/07/28/extitle/';
+            this.page.url = 'http://0rkha.github.io/2019/07/28/extitle/';
               
             this.page.identifier = '2019/07/28/extitle/';
               
