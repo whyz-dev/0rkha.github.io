@@ -243,7 +243,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
+    <article class="postShorten postShorten--thumbnailimg-left">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -275,37 +275,31 @@
 
             </div>
             
-                <div class="postShorten-content">
-                    <h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p><a target="_blank" rel="noopener" href="https://www.acmicpc.net/problem/13537">https://www.acmicpc.net/problem/13537</a></p>
-<h2 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h2><p>수열을 다음과 같은 업데이트 쿼리로 해석한다.</p>
-<p>a b : 위치가 a인 위치를 b로 교체</p>
-<p>그리고 쿼리 (i j k)를 k에 대해 내림차순으로 정렬한다.</p>
-<p>업데이트 쿼리들도 마찬가지로, b에 대해 내림차순으로 정렬한다.</p>
-<p>그리고, k&gt;b를 만족할때, 세그먼트 트리에서 위치가 a인 곳에 1을 업데이트 한다.</p>
-<p>그러면, 트리에서 i부터 j까지의 합이 쿼리 (i j k)에 대한 답변이 된다.</p>
-<p>출력할때도, 쿼리의 입력순으로 정렬해주자. </p>
-<h2 id="소스"><a href="#소스" class="headerlink" title="소스"></a>소스</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">_</span> &#123; ll idx, i, j, k; &#125;;</span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt;(_ a, _ b) &#123; <span class="keyword">return</span> a.k &gt; b.k; &#125;</span><br><span class="line">vector&lt;_&gt; query;</span><br><span class="line">vector&lt;pair&lt;ll, ll&gt; &gt;arr, ans;</span><br><span class="line">ll N, MAX, tree[<span class="number">400000</span>], M;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(ll p, ll v)</span> </span>&#123;</span><br><span class="line">	p += MAX;</span><br><span class="line">	tree[p] = v;</span><br><span class="line">	<span class="keyword">for</span> (; p /= <span class="number">2</span>; tree[p] = tree[<span class="number">2</span> * p] + tree[<span class="number">2</span> * p + <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">sum</span><span class="params">(ll s, ll e)</span> </span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	s += MAX, e += MAX;</span><br><span class="line">	<span class="keyword">while</span> (s &lt; e) &#123;</span><br><span class="line">		<span class="keyword">if</span> (s % <span class="number">2</span>)</span><br><span class="line">			res += tree[s++];</span><br><span class="line">		<span class="keyword">if</span> (e % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">			res += tree[e--];</span><br><span class="line">		e /= <span class="number">2</span>;</span><br><span class="line">		s /= <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(s==e)</span><br><span class="line">		res += tree[e];</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin &gt;&gt; N;</span><br><span class="line">	<span class="keyword">for</span> (MAX = <span class="number">1</span>; MAX &lt; N; MAX *= <span class="number">2</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">		ll tmp;</span><br><span class="line">		cin &gt;&gt; tmp;</span><br><span class="line">		arr.<span class="built_in">push_back</span>(&#123; tmp,i &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	cin &gt;&gt; M;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; M; i++) &#123;</span><br><span class="line">		ll a, b, c;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		query.<span class="built_in">push_back</span>(&#123; i,a,b,c &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>(), greater&lt;pair&lt;ll, ll&gt; &gt;() );</span><br><span class="line">	<span class="built_in">sort</span>(query.<span class="built_in">begin</span>(), query.<span class="built_in">end</span>());</span><br><span class="line">	ll now = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> idx : query) &#123;</span><br><span class="line">		<span class="keyword">while</span> (now &lt; arr.<span class="built_in">size</span>() &amp;&amp; idx.k &lt; arr[now].first) &#123;</span><br><span class="line">			<span class="built_in">update</span>(arr[now].second, <span class="number">1</span>);</span><br><span class="line">			now++;</span><br><span class="line">		&#125;</span><br><span class="line">		ans.<span class="built_in">push_back</span>(&#123; idx.idx, <span class="built_in">sum</span>(idx.i,idx.j) &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> idx : ans)</span><br><span class="line">		cout &lt;&lt; idx.second &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+                <div class="postShorten-excerpt">
+                    <p>[BOJ] 13537 | 수열과 쿼리 1</p>
                     
+                        <a
+                            href="/2019/08/01/extitle/"
+                            class="postShorten-excerpt_link link"
+                            aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
+                        >
+                            Continue reading
+                        </a>
                         
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2019/08/01/extitle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <a
+                href="/2019/08/01/extitle/"
+                aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
+            >
+                <div class="postShorten-thumbnailimg">
+                    <img alt="" src="http://0rkha.github.io/2019/08/01/extitle/boj.png"/>
+                </div>
+            </a>
+            
         
     </article>
     
@@ -412,6 +406,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
+                            aria-label=": [BOJ] 2293 | 동전 1"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -434,6 +438,16 @@
                 </div>
                 
                 <div class="media">
+                    
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
+                            aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
                     
                     <div class="media-body">
                         <a
@@ -458,6 +472,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
+                            aria-label=": [BOJ] 2294 | 동전 2"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -480,6 +504,16 @@
                 </div>
                 
                 <div class="media">
+                    
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/07/26/extitle/"
+                            aria-label=": [BOJ] 11047 | 동전 0"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
                     
                     <div class="media-body">
                         <a
@@ -504,6 +538,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/07/28/extitle/"
+                            aria-label=": [BOJ] 2436 | 공약수"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/07/28/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -527,6 +571,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://0rkha.github.io/2019/08/01/extitle/"
+                            aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
+                        >
+                            <img class="media-image" src="http://0rkha.github.io/2019/08/01/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -542,7 +596,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 13537 | 수열과 쿼리 1</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
