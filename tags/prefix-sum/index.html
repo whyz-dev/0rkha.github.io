@@ -243,7 +243,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
+    <article class="postShorten postShorten--thumbnailimg-right">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -275,31 +275,17 @@
 
             </div>
             
-                <div class="postShorten-content">
-                    <h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p><a target="_blank" rel="noopener" href="https://www.acmicpc.net/problem/1451">https://www.acmicpc.net/problem/1451</a></p>
-<h2 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h2><p><img src="/%5C01.png" alt="01"></p>
-<p>가능한 6가지 경우의 수를 생각하여 모든 경우의 수를 계산해주면 된다.</p>
-<p>직사각형의 넓이를 구할때는 구간 합(prefix sum)을 이용하여 O(1)에 계산해줄 수 있다.</p>
-<p>두 직사각형 사이에 한 직사각형이 껴있는 경우의 시간복잡도는 각각 O(N^2)과 O(M^2),</p>
-<p>나머지 경우의 수는 시간복잡도가 O(NM)이므로, 대충 전체 시간복잡도는 O(NM).</p>
-<h2 id="소스"><a href="#소스" class="headerlink" title="소스"></a>소스</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> N, M, arr[<span class="number">111</span>][<span class="number">111</span>], sum[<span class="number">111</span>][<span class="number">111</span>], ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= M; j++) &#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%1d&quot;</span>, &amp;arr[i][j]);</span><br><span class="line">			sum[i][j] = sum[i - <span class="number">1</span>][j] + sum[i][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>] + arr[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; N; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; M; j++) &#123;</span><br><span class="line">			<span class="type">long</span> <span class="type">long</span> a, b, c;</span><br><span class="line">			a = sum[i][j];</span><br><span class="line">			b = sum[N][j] - sum[i][j];</span><br><span class="line">			c = sum[N][M] - sum[N][j];</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, a*b*c);</span><br><span class="line"></span><br><span class="line">			b = sum[i][M] - sum[i][j];</span><br><span class="line">			c = sum[N][M] - sum[i][M];</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, a*b*c);</span><br><span class="line"></span><br><span class="line">			a = sum[N][M] - sum[N][j] - sum[i][M] +sum[i][j];</span><br><span class="line">			b = sum[N][j];</span><br><span class="line">			c = sum[i][M] - sum[i][j];</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, a*b*c);</span><br><span class="line"></span><br><span class="line">			b = sum[i][M];</span><br><span class="line">			c = sum[N][j] - sum[i][j];</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, a*b*c);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; N; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; N; j++)</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, sum[i][M] * (sum[j][M] - sum[i][M]) *(sum[N][M] - sum[j][M]));</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; M; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; M; j++)</span><br><span class="line">			ans = <span class="built_in">max</span>(ans, sum[N][i] * (sum[N][j] - sum[N][i]) *(sum[N][M] - sum[N][j]));</span><br><span class="line">	cout &lt;&lt; ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+                <div class="postShorten-excerpt">
+                    <p>[BOJ] 1451 | 직사각형으로 나누기</p>
                     
+                        <a
+                            href="/2019/07/26/extitle/"
+                            class="postShorten-excerpt_link link"
+                            aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
+                        >
+                            Continue reading
+                        </a>
                         
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2019/07/26/extitle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -310,7 +296,7 @@
                 aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
             >
                 <div class="postShorten-thumbnailimg">
-                    <img alt="" src="http://0rkha.github.io/2019/07/26/extitle/boj.png"/>
+                    <img alt="" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg"/>
                 </div>
             </a>
             
@@ -401,9 +387,9 @@
                         <a
                             class="link-unstyled"
                             href="http://0rkha.github.io/2019/07/21/extitle/"
-                            aria-label=": 이 블로그에 대하여"
+                            aria-label=": Intro"
                         >
-                            <h3 class="media-heading">이 블로그에 대하여</h3>
+                            <h3 class="media-heading">Intro</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -412,7 +398,8 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>안녕하세요, 0rkha입니다.</p>
+<p>오늘 2019&#x2F;07&#x2F;21을 기준으로 새로운 깃허브 블로그를 개설하게 되었습니다.</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -426,7 +413,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2293 | 동전 1"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -445,7 +432,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2293 | 동전 1</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -459,7 +446,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -478,7 +465,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 1451 | 직사각형으로 나누기</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -492,7 +479,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2294 | 동전 2"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -511,7 +498,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2294 | 동전 2</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -525,7 +512,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 11047 | 동전 0"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/7.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -544,7 +531,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 11047 | 동전 0</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -558,7 +545,7 @@
                             href="http://0rkha.github.io/2019/07/28/extitle/"
                             aria-label=": [BOJ] 2436 | 공약수"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/28/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -577,7 +564,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2436 | 공약수</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -591,7 +578,7 @@
                             href="http://0rkha.github.io/2019/08/01/extitle/"
                             aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/01/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/18.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -624,7 +611,7 @@
                             href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 5419 | 북서풍"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/17.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -657,7 +644,7 @@
                             href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 3176 | 도로 네트워크"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/17.svg" width="90" height="90"/>
                         </a>
                     </div>
                     

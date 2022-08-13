@@ -13,16 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"문제https://www.acmicpc.net/problem/2293\n풀이DP를 사용하여 풀 수 있는 간단한 문제.\nDP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수\nDP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1)\n따라서 전체 시간복잡도는 O(nk)가 된다.\nDP의 점화식을 2차원으로 세우면 메모리 초과가 나므로, 위와같은 1차원으로 짜주어야 한다.\nfor문을 돌 때, 가격이 i일때 경우의수를 0~n-1까지 도는 것이 아니라,\n 물건 번호가 j일때 가격을 1~k까지 DP를 업데이트 하는것에 주의하자.\n소스123456789101112131415161718#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int n, k, dp[10010], coin[101];int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; n &gt;&gt; k;\tfor (int i = 0; i &lt;n; i++)\t\tcin &gt;&gt; coin[i];\tdp[0] = 1;\tsort(coin, coin + n);\tfor (int j = 0; j &lt; n; j++) \t\tfor (int i = 1; i &lt;= k; i++) \t\t\tif (i &gt;= coin[j])\t\t\t\tdp[i] += dp[i - coin[j]];\tcout &lt;&lt; dp[k];&#125;\n\n","dateCreated":"2019-07-26T16:38:33+09:00","dateModified":"2022-08-14T03:59:02+09:00","datePublished":"2019-07-26T16:38:33+09:00","description":"","headline":"[BOJ] 2293 | 동전 1","image":["boj.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://0rkha.github.io/2019/07/26/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://0rkha.github.io/2019/07/26/extitle/","keywords":"BOJ, DP","thumbnailUrl":"boj.png"}</script>
-    <meta name="description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;2293 풀이DP를 사용하여 풀 수 있는 간단한 문제. DP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수 DP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1) 따라서 전체 시간복잡도는 O(nk)가 된다. DP의 점화식을 2차원으로 세우면 메모리">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"\n\n문제https://www.acmicpc.net/problem/2293\n풀이DP를 사용하여 풀 수 있는 간단한 문제.\nDP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수\nDP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1)\n따라서 전체 시간복잡도는 O(nk)가 된다.\nDP의 점화식을 2차원으로 세우면 메모리 초과가 나므로, 위와같은 1차원으로 짜주어야 한다.\nfor문을 돌 때, 가격이 i일때 경우의수를 0~n-1까지 도는 것이 아니라,\n 물건 번호가 j일때 가격을 1~k까지 DP를 업데이트 하는것에 주의하자.\n소스123456789101112131415161718#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int n, k, dp[10010], coin[101];int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; n &gt;&gt; k;\tfor (int i = 0; i &lt;n; i++)\t\tcin &gt;&gt; coin[i];\tdp[0] = 1;\tsort(coin, coin + n);\tfor (int j = 0; j &lt; n; j++) \t\tfor (int i = 1; i &lt;= k; i++) \t\t\tif (i &gt;= coin[j])\t\t\t\tdp[i] += dp[i - coin[j]];\tcout &lt;&lt; dp[k];&#125;","dateCreated":"2019-07-26T16:38:33+09:00","dateModified":"2022-08-14T04:17:26+09:00","datePublished":"2019-07-26T16:38:33+09:00","description":"[BOJ] 2293 | 동전 1","headline":"[BOJ] 2293 | 동전 1","image":["https://d2gd6pc034wcta.cloudfront.net/tier/11.svg"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://0rkha.github.io/2019/07/26/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://0rkha.github.io/2019/07/26/extitle/","keywords":"BOJ, DP","thumbnailUrl":"https://d2gd6pc034wcta.cloudfront.net/tier/11.svg"}</script>
+    <meta name="description" content="[BOJ] 2293 | 동전 1">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[BOJ] 2293 | 동전 1">
 <meta property="og:url" content="http://0rkha.github.io/2019/07/26/extitle/index.html">
 <meta property="og:site_name" content="0rkha Blog">
-<meta property="og:description" content="문제https:&#x2F;&#x2F;www.acmicpc.net&#x2F;problem&#x2F;2293 풀이DP를 사용하여 풀 수 있는 간단한 문제. DP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수 DP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1) 따라서 전체 시간복잡도는 O(nk)가 된다. DP의 점화식을 2차원으로 세우면 메모리">
+<meta property="og:description" content="[BOJ] 2293 | 동전 1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-07-26T07:38:33.000Z">
-<meta property="article:modified_time" content="2022-08-13T18:59:02.908Z">
+<meta property="article:modified_time" content="2022-08-13T19:17:26.298Z">
 <meta property="article:author" content="0rkha (GangJun Jo)">
 <meta property="article:tag" content="BOJ">
 <meta property="article:tag" content="DP">
@@ -35,8 +35,8 @@
         <meta property="og:image" content="http://0rkha.github.io/assets/images/thumbnail.png"/>
     
     
-        <meta property="og:image" content="http://0rkha.github.io/2019/07/26/extitle/boj.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://0rkha.github.io/2019/07/26/extitle/boj.png"/>
+        <meta property="og:image" content="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg"/>
     
     
     
@@ -286,7 +286,9 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p><a target="_blank" rel="noopener" href="https://www.acmicpc.net/problem/2293">https://www.acmicpc.net/problem/2293</a></p>
+            <!-- excerpt -->
+
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p><a target="_blank" rel="noopener" href="https://www.acmicpc.net/problem/2293">https://www.acmicpc.net/problem/2293</a></p>
 <h2 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h2><p>DP를 사용하여 풀 수 있는 간단한 문제.</p>
 <p>DP[i] &#x3D; 가격이 i일때 만들 수 있는 모든 경우의 수</p>
 <p>DP[i] +&#x3D; DP[ i - coin[j] ], (j &#x3D; 0~n-1)</p>
@@ -295,8 +297,6 @@
 <p>for문을 돌 때, 가격이 i일때 경우의수를 0~n-1까지 도는 것이 아니라,</p>
 <p> 물건 번호가 j일때 가격을 1~k까지 DP를 업데이트 하는것에 주의하자.</p>
 <h2 id="소스"><a href="#소스" class="headerlink" title="소스"></a>소스</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k, dp[<span class="number">10010</span>], coin[<span class="number">101</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;n; i++)</span><br><span class="line">		cin &gt;&gt; coin[i];</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">sort</span>(coin, coin + n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) </span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) </span><br><span class="line">			<span class="keyword">if</span> (i &gt;= coin[j])</span><br><span class="line">				dp[i] += dp[i - coin[j]];</span><br><span class="line">	cout &lt;&lt; dp[k];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
             
 
 
@@ -335,8 +335,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2019/07/21/extitle/"
-                    data-tooltip="이 블로그에 대하여"
-                    aria-label="NEXT: 이 블로그에 대하여"
+                    data-tooltip="Intro"
+                    aria-label="NEXT: Intro"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -464,8 +464,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2019/07/21/extitle/"
-                    data-tooltip="이 블로그에 대하여"
-                    aria-label="NEXT: 이 블로그에 대하여"
+                    data-tooltip="Intro"
+                    aria-label="NEXT: Intro"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -663,9 +663,9 @@
                         <a
                             class="link-unstyled"
                             href="http://0rkha.github.io/2019/07/21/extitle/"
-                            aria-label=": 이 블로그에 대하여"
+                            aria-label=": Intro"
                         >
-                            <h3 class="media-heading">이 블로그에 대하여</h3>
+                            <h3 class="media-heading">Intro</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -674,7 +674,8 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>안녕하세요, 0rkha입니다.</p>
+<p>오늘 2019&#x2F;07&#x2F;21을 기준으로 새로운 깃허브 블로그를 개설하게 되었습니다.</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -688,7 +689,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2293 | 동전 1"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -707,7 +708,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2293 | 동전 1</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -721,7 +722,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 1451 | 직사각형으로 나누기"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -740,7 +741,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 1451 | 직사각형으로 나누기</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -754,7 +755,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 2294 | 동전 2"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -773,7 +774,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2294 | 동전 2</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -787,7 +788,7 @@
                             href="http://0rkha.github.io/2019/07/26/extitle/"
                             aria-label=": [BOJ] 11047 | 동전 0"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/26/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/7.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -806,7 +807,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 11047 | 동전 0</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -820,7 +821,7 @@
                             href="http://0rkha.github.io/2019/07/28/extitle/"
                             aria-label=": [BOJ] 2436 | 공약수"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/07/28/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/11.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -839,7 +840,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 2436 | 공약수</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -853,7 +854,7 @@
                             href="http://0rkha.github.io/2019/08/01/extitle/"
                             aria-label=": [BOJ] 13537 | 수열과 쿼리 1"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/01/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/18.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -886,7 +887,7 @@
                             href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 5419 | 북서풍"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/17.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
@@ -919,7 +920,7 @@
                             href="http://0rkha.github.io/2019/08/07/extitle/"
                             aria-label=": [BOJ] 3176 | 도로 네트워크"
                         >
-                            <img class="media-image" src="http://0rkha.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                            <img class="media-image" src="https://d2gd6pc034wcta.cloudfront.net/tier/17.svg" width="90" height="90"/>
                         </a>
                     </div>
                     
