@@ -243,7 +243,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
+    <article class="postShorten postShorten--thumbnailimg-left">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -275,41 +275,31 @@
 
             </div>
             
-                <div class="postShorten-content">
-                    <h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p><a target="_blank" rel="noopener" href="https://www.acmicpc.net/problem/3176">https://www.acmicpc.net/problem/3176</a></p>
-<h2 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h2><p>sparse table을 이용한 LCA 문제.</p>
-<p>LCA를 구현하고, 다음과 같은 DP 테이블을 만든다.</p>
-<p>maxi[i][j] &#x3D; i의 j번째 조상까지의 도로중 가장 긴 도로의 길이.</p>
-<p>maxi[i][j] &#x3D; max(maxi[parent[i][j - 1]][j - 1], maxi[i][j-1]);</p>
-<p>maxi[i][j] &#x3D; i의 j번째 조상까지의 도로중 가장 짧은 도로의 길이.</p>
-<p>mini[i][j] &#x3D; min(mini[parent[i][j - 1]][j - 1], mini[i][j - 1]);</p>
-<p>이를 잘 이용하여 풀면 된다.</p>
-<p>sparse-table 초기화에 O(NlogN)</p>
-<p>쿼리 실행 중, 두 노드의 높이를 맞추는데 O(logN), 가장 긴&#x2F;짧은 도로를 찾는데 O(logN)이므로,</p>
-<p>쿼리 실행의 시간복잡도는 O(QlogN).</p>
-<p>전체 시간복잡도는 O((Q+N)logN)</p>
-<h2 id="소스"><a href="#소스" class="headerlink" title="소스"></a>소스</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> P pair<span class="string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, q, depth[<span class="number">110000</span>], mini[<span class="number">110000</span>][<span class="number">20</span>], maxi[<span class="number">110000</span>][<span class="number">20</span>], parent[<span class="number">110000</span>][<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">vector&lt;P&gt; G[<span class="number">110000</span>];</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; Q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="type">int</span> a, b, c;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		G[a].<span class="built_in">push_back</span>(&#123; b,c &#125;);</span><br><span class="line">		G[b].<span class="built_in">push_back</span>(&#123; a,c &#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	depth[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	parent[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	Q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">while</span> (!Q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="type">int</span> now = Q.<span class="built_in">front</span>();</span><br><span class="line">		Q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">for</span> (P nxt : G[now]) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!depth[nxt.first]) &#123;</span><br><span class="line">				depth[nxt.first] = depth[now] + <span class="number">1</span>;</span><br><span class="line">				mini[nxt.first][<span class="number">0</span>] = nxt.second;</span><br><span class="line">				maxi[nxt.first][<span class="number">0</span>] = nxt.second;</span><br><span class="line">				parent[nxt.first][<span class="number">0</span>] = now;</span><br><span class="line">				Q.<span class="built_in">push</span>(nxt.first);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			parent[j][i] = parent[parent[j][i - <span class="number">1</span>]][i - <span class="number">1</span>];</span><br><span class="line">			maxi[j][i] = <span class="built_in">max</span>(maxi[parent[j][i - <span class="number">1</span>]][i - <span class="number">1</span>], maxi[j][i<span class="number">-1</span>]);</span><br><span class="line">			mini[j][i] = <span class="built_in">min</span>(mini[parent[j][i - <span class="number">1</span>]][i - <span class="number">1</span>], mini[j][i - <span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	cin &gt;&gt; q;</span><br><span class="line">	<span class="keyword">while</span> (q--) &#123;</span><br><span class="line">		<span class="type">int</span> a, b, dismax=<span class="number">0</span>, dismin=<span class="number">1000000</span>;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		<span class="keyword">if</span> (depth[a] &lt; depth[b])</span><br><span class="line">			<span class="built_in">swap</span>(a, b);</span><br><span class="line">		<span class="type">int</span> diff = depth[a] - depth[b];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; diff; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (diff &amp; <span class="number">1</span>) &#123;</span><br><span class="line">				dismax = <span class="built_in">max</span>(dismax, maxi[a][i]);</span><br><span class="line">				dismin = <span class="built_in">min</span>(dismin, mini[a][i]);</span><br><span class="line">				a = parent[a][i];</span><br><span class="line">			&#125;</span><br><span class="line">			diff /= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (a != b) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">19</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">				<span class="keyword">if</span> (parent[a][i] != parent[b][i]) &#123;</span><br><span class="line">					dismax = <span class="built_in">max</span>(&#123; dismax, maxi[a][i], maxi[b][i] &#125;);</span><br><span class="line">					dismin = <span class="built_in">min</span>(&#123; dismin, mini[a][i], mini[b][i] &#125;);</span><br><span class="line">					a = parent[a][i], b = parent[b][i];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			dismax = <span class="built_in">max</span>(&#123; dismax, maxi[a][<span class="number">0</span>], maxi[b][<span class="number">0</span>] &#125;);</span><br><span class="line">			dismin = <span class="built_in">min</span>(&#123; dismin, mini[a][<span class="number">0</span>], mini[b][<span class="number">0</span>] &#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; dismin &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; dismax &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+                <div class="postShorten-excerpt">
+                    <p>[BOJ] 3176 | 도로 네트워크</p>
                     
+                        <a
+                            href="/2019/08/07/extitle/"
+                            class="postShorten-excerpt_link link"
+                            aria-label=": [BOJ] 3176 | 도로 네트워크"
+                        >
+                            Continue reading
+                        </a>
                         
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2019/08/07/extitle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <a
+                href="/2019/08/07/extitle/"
+                aria-label=": [BOJ] 3176 | 도로 네트워크"
+            >
+                <div class="postShorten-thumbnailimg">
+                    <img alt="" src="http://stronghigh.github.io/2019/08/07/extitle/boj.png"/>
+                </div>
+            </a>
+            
         
     </article>
     
@@ -587,6 +577,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            aria-label=": [BOJ] 3176 | 도로 네트워크"
+                        >
+                            <img class="media-image" src="http://stronghigh.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -602,7 +602,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 3176 | 도로 네트워크</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

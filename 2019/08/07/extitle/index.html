@@ -13,7 +13,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"\n\n문제https://www.acmicpc.net/problem/5419\n풀이임의의 한 섬(a,b)을 기준으로, 그 점과 이어질 수 있는 섬(c,d)들은 모두 a&lt;&#x3D;c와 b&gt;c를 만족해야한다.\n이를 이용하여, y축을 기준으로 오름차순으로 정렬하고, y축이 같은 경우는 x기준으로 내림차순으로 정렬하면, 아무 섬이나 잡아도, 해당 섬 이전에 선택된 섬들은 모두 해당 섬보다 남쪽에 있을 것임이 자명하다.또한 이전에 선택된 섬들 중에, 해당 섬보다 동쪽에 있는 섬들의 개수를 세주면, 해당 섬보다 남쪽에 있으면서 동쪽에 있는 섬들을 모두 선택할 수 있게 된다.\n단, 좌표가 -10^9~10^9이므로, O(N)으로 가능한 X좌표들을 모두 저장해두고, 이분 탐색으로 index 위치를 찾는다. \n섬들의 개수는 세그먼트 트리로 O(logN)만에 구할 수 있으며, 개수 업데이트에 O(logN), 이분 탐색에 O(logN)이므로,\n모든 점 탐색은O(NlogN)만에 가능하다. \n소스12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;cstring&gt;#define P pair&lt;int,int&gt;using namespace std;int tree[400000], num[80000], MAX, T,N;bool cmp1(P a, P b) &#123; return a.first &lt; b.first; &#125;bool cmp2(P a, P b) &#123; return (a.second == b.second) ? (a.first &gt; b.first):(a.second &lt; b.second); &#125;void update(int p, int v) &#123;\tp += MAX;\ttree[p] += v;\tfor (; p /= 2; tree[p] = tree[2 * p] + tree[2 * p + 1]);&#125;int sum(int s, int e) &#123;\tint res = 0;\ts += MAX, e += MAX;\twhile (s &lt; e) &#123;\t\tif (s % 2)\t\t\tres += tree[s++];\t\tif (e % 2 == 0)\t\t\tres += tree[e--];\t\ts /= 2, e /= 2;\t&#125;\tif (e == s)\t\tres += tree[s];\treturn res;&#125;int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; T;;\twhile (T--) &#123;\t\tlong long size = 0, res=0; \t\tvector&lt;P&gt; V;\t\tcin &gt;&gt; N;\t\tfor (MAX = 1; MAX &lt; N; MAX *= 2);\t\tmemset(tree, 0, sizeof(tree));\t\tmemset(num, 0, sizeof(num));\t\tfor (int i = 0; i &lt; N; i++) &#123;\t\t\tint x, y;\t\t\tcin &gt;&gt; x &gt;&gt; y;\t\t\tV.push_back(&#123; x,y &#125;);\t\t&#125;\t\tsort(V.begin(), V.end(), cmp1);\t\tfor (int i = 0; i &lt; V.size(); i++) &#123;\t\t\tif (!i || num[size] != V[i].first)\t\t\t\tnum[size++] = V[i].first;\t\t&#125;\t\tsort(V.begin(), V.end(), cmp2);\t\tfor (P idx : V) &#123;\t\t\tint l = 0, r = size-1;\t\t\twhile (l &lt; r) &#123;\t\t\t\tint m = (l + r) / 2;\t\t\t\tif (num[m] &gt; idx.first)\t\t\t\t\tr = m - 1;\t\t\t\telse if (num[m] &lt; idx.first)\t\t\t\t\tl = m + 1;\t\t\t\telse &#123;\t\t\t\t\tl = m;\t\t\t\t\tbreak;\t\t\t\t&#125;\t\t\t&#125;\t\t\tres += sum(l, size);\t\t\tupdate(l, 1);\t\t&#125;\t\tcout &lt;&lt; res &lt;&lt; &quot;\\n&quot;;\t&#125;&#125;","dateCreated":"2019-08-07T22:01:09+09:00","dateModified":"2022-08-14T03:04:42+09:00","datePublished":"2019-08-07T22:01:09+09:00","description":"[BOJ] 5419 | 북서풍","headline":"[BOJ] 5419 | 북서풍","image":["boj.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/08/07/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/08/07/extitle/","keywords":"BOJ, segment-tree, binary-search, line-sweeping","thumbnailUrl":"boj.png"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png"},"articleBody":"\n\n문제https://www.acmicpc.net/problem/5419\n풀이임의의 한 섬(a,b)을 기준으로, 그 점과 이어질 수 있는 섬(c,d)들은 모두 a&lt;&#x3D;c와 b&gt;c를 만족해야한다.\n이를 이용하여, y축을 기준으로 오름차순으로 정렬하고, y축이 같은 경우는 x기준으로 내림차순으로 정렬하면, 아무 섬이나 잡아도, 해당 섬 이전에 선택된 섬들은 모두 해당 섬보다 남쪽에 있을 것임이 자명하다.또한 이전에 선택된 섬들 중에, 해당 섬보다 동쪽에 있는 섬들의 개수를 세주면, 해당 섬보다 남쪽에 있으면서 동쪽에 있는 섬들을 모두 선택할 수 있게 된다.\n단, 좌표가 -10^9~10^9이므로, O(N)으로 가능한 X좌표들을 모두 저장해두고, 이분 탐색으로 index 위치를 찾는다. \n섬들의 개수는 세그먼트 트리로 O(logN)만에 구할 수 있으며, 개수 업데이트에 O(logN), 이분 탐색에 O(logN)이므로,\n모든 점 탐색은O(NlogN)만에 가능하다. \n소스12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;cstring&gt;#define P pair&lt;int,int&gt;using namespace std;int tree[400000], num[80000], MAX, T,N;bool cmp1(P a, P b) &#123; return a.first &lt; b.first; &#125;bool cmp2(P a, P b) &#123; return (a.second == b.second) ? (a.first &gt; b.first):(a.second &lt; b.second); &#125;void update(int p, int v) &#123;\tp += MAX;\ttree[p] += v;\tfor (; p /= 2; tree[p] = tree[2 * p] + tree[2 * p + 1]);&#125;int sum(int s, int e) &#123;\tint res = 0;\ts += MAX, e += MAX;\twhile (s &lt; e) &#123;\t\tif (s % 2)\t\t\tres += tree[s++];\t\tif (e % 2 == 0)\t\t\tres += tree[e--];\t\ts /= 2, e /= 2;\t&#125;\tif (e == s)\t\tres += tree[s];\treturn res;&#125;int main() &#123;\tios::sync_with_stdio(0); cin.tie(0);\tcin &gt;&gt; T;;\twhile (T--) &#123;\t\tlong long size = 0, res=0; \t\tvector&lt;P&gt; V;\t\tcin &gt;&gt; N;\t\tfor (MAX = 1; MAX &lt; N; MAX *= 2);\t\tmemset(tree, 0, sizeof(tree));\t\tmemset(num, 0, sizeof(num));\t\tfor (int i = 0; i &lt; N; i++) &#123;\t\t\tint x, y;\t\t\tcin &gt;&gt; x &gt;&gt; y;\t\t\tV.push_back(&#123; x,y &#125;);\t\t&#125;\t\tsort(V.begin(), V.end(), cmp1);\t\tfor (int i = 0; i &lt; V.size(); i++) &#123;\t\t\tif (!i || num[size] != V[i].first)\t\t\t\tnum[size++] = V[i].first;\t\t&#125;\t\tsort(V.begin(), V.end(), cmp2);\t\tfor (P idx : V) &#123;\t\t\tint l = 0, r = size-1;\t\t\twhile (l &lt; r) &#123;\t\t\t\tint m = (l + r) / 2;\t\t\t\tif (num[m] &gt; idx.first)\t\t\t\t\tr = m - 1;\t\t\t\telse if (num[m] &lt; idx.first)\t\t\t\t\tl = m + 1;\t\t\t\telse &#123;\t\t\t\t\tl = m;\t\t\t\t\tbreak;\t\t\t\t&#125;\t\t\t&#125;\t\t\tres += sum(l, size);\t\t\tupdate(l, 1);\t\t&#125;\t\tcout &lt;&lt; res &lt;&lt; &quot;\\n&quot;;\t&#125;&#125;","dateCreated":"2019-08-07T22:01:09+09:00","dateModified":"2022-08-14T03:13:10+09:00","datePublished":"2019-08-07T22:01:09+09:00","description":"[BOJ] 5419 | 북서풍","headline":"[BOJ] 5419 | 북서풍","image":["boj.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://stronghigh.github.io/2019/08/07/extitle/"},"publisher":{"@type":"Organization","name":"0rkha (GangJun Jo)","sameAs":["https://github.com/0rkha","https://facebook.com/profile.php?id=100011132584349","mailto:xx0rkha@gmail.com"],"image":"thumbnail.png","logo":{"@type":"ImageObject","url":"thumbnail.png"}},"url":"http://stronghigh.github.io/2019/08/07/extitle/","keywords":"BOJ, segment-tree, binary-search, line-sweeping","thumbnailUrl":"boj.png"}</script>
     <meta name="description" content="[BOJ] 5419 | 북서풍">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[BOJ] 5419 | 북서풍">
@@ -22,7 +22,7 @@
 <meta property="og:description" content="[BOJ] 5419 | 북서풍">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-08-07T13:01:09.000Z">
-<meta property="article:modified_time" content="2022-08-13T18:04:42.919Z">
+<meta property="article:modified_time" content="2022-08-13T18:13:10.693Z">
 <meta property="article:author" content="0rkha (GangJun Jo)">
 <meta property="article:tag" content="BOJ">
 <meta property="article:tag" content="segment-tree">
@@ -255,11 +255,9 @@
             <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
-                        hasCoverCaption">
+                        ">
                 
 <article class="post">
-    
-        <span class="post-header-cover-caption caption">[BOJ] 5419 | 북서풍</span>
     
     
         <div class="post-header main-content-wrap text-left">
@@ -855,6 +853,16 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a
+                            class="link-unstyled"
+                            href="http://stronghigh.github.io/2019/08/07/extitle/"
+                            aria-label=": [BOJ] 3176 | 도로 네트워크"
+                        >
+                            <img class="media-image" src="http://stronghigh.github.io/2019/08/07/extitle/boj.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a
                             class="link-unstyled"
@@ -870,7 +878,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>[BOJ] 3176 | 도로 네트워크</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
