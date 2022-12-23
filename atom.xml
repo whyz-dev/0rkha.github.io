@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://0rkha.xyz/"/>
-  <updated>2022-08-13T19:17:17.398Z</updated>
+  <updated>2022-12-23T14:11:40.792Z</updated>
   <id>http://0rkha.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[DevDiary] 22.12.23</title>
+    <link href="http://0rkha.xyz/2022/12/23/DevDiary-22-12-23/"/>
+    <id>http://0rkha.xyz/2022/12/23/DevDiary-22-12-23/</id>
+    <published>2022-12-23T13:26:37.000Z</published>
+    <updated>2022-12-23T14:11:40.792Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --><h1 id="개발-일지"><a href="#개발-일지" class="headerlink" title="개발 일지"></a>개발 일지</h1><ol><li></li></ol><p>소프트웨어 마에스트로를 준비하기로 마음먹었다</p><ol start="2"><li></li></ol><p>알고리즘</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2022.12.23&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DevDiary" scheme="http://0rkha.xyz/categories/DevDiary/"/>
+    
+    
+      <category term="DevDiary" scheme="http://0rkha.xyz/tags/DevDiary/"/>
+    
+  </entry>
   
   <entry>
     <title>[BOJ] 3176 | 도로 네트워크</title>
@@ -227,7 +249,7 @@
     <published>2019-07-21T12:10:33.000Z</published>
     <updated>2022-08-13T19:20:36.269Z</updated>
     
-    <content type="html"><![CDATA[<p>안녕하세요, 0rkha입니다.</p><p>오늘 2019&#x2F;07&#x2F;21을 기준으로 새로운 깃허브 블로그를 개설하게 되었습니다.</p><span id="more"></span><p>아마 머신러닝과 딥러닝, 알고리즘 등의 데이터 사이언스 부분의 포스팅을 주로 하게 될것 같습니다.</p><p>블로그의 테마는  <a href="https://github.com/LouisBarranqueiro">LouisBarranqueiro</a>의 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak">tranquilpeak</a>를 이용하여 수정하였습니다.</p><p>게시글에 대하여 궁금한 점이나 개인적으로 연락하시고 싶으시면,</p><p><a href="mailto:&#52;&#117;&#114;&#x61;&#48;&#50;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#52;&#117;&#114;&#x61;&#48;&#50;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a> 으로 메일을 보내주시면 감사하겠습니다.</p>]]></content>
+    <content type="html"><![CDATA[<p>안녕하세요, 0rkha입니다.</p><p>오늘 2019&#x2F;07&#x2F;21을 기준으로 새로운 깃허브 블로그를 개설하게 되었습니다.</p><span id="more"></span><p>아마 머신러닝과 딥러닝, 알고리즘 등의 데이터 사이언스 부분의 포스팅을 주로 하게 될것 같습니다.</p><p>블로그의 테마는  <a href="https://github.com/LouisBarranqueiro">LouisBarranqueiro</a>의 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak">tranquilpeak</a>를 이용하여 수정하였습니다.</p><p>게시글에 대하여 궁금한 점이나 개인적으로 연락하시고 싶으시면,</p><p><a href="mailto:&#52;&#117;&#114;&#x61;&#x30;&#x32;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#52;&#117;&#114;&#x61;&#x30;&#x32;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a> 으로 메일을 보내주시면 감사하겠습니다.</p>]]></content>
     
     <summary type="html">
     
